@@ -34,7 +34,7 @@ df['Status_Gizi'] = le_target.fit_transform(df['Status_Gizi'])     # target enco
 scaler = StandardScaler()
 df[['Umur_(bulan)', 'Tinggi_Badan_(cm)']] = scaler.fit_transform(df[['Umur_(bulan)', 'Tinggi_Badan_(cm)']])
 
-# === Split Data ===
+# Split Data
 X = df.drop(columns=['Status_Gizi'])
 y = df['Status_Gizi']
 stratify_col = df['Umur_(bulan)'].astype(str) + "_" + df['Jenis_Kelamin'].astype(str)
@@ -43,7 +43,7 @@ X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.25, random_state=42, stratify=stratify_col
 )
 
-# Hyperparameter Tuning with GridSearchCV
+# Hyperparameter Tuning dengan GridSearchCV
 param_grid = {
     'n_estimators': [100],
     'max_depth': [12],
@@ -78,7 +78,7 @@ print("Akurasi Testing :", accuracy_score(y_test, y_pred_test))
 print("\nClassification Report:")
 print(classification_report(y_test, y_pred_test, target_names=le_target.classes_))
 
-# === Confusion Matrix ===
+# Confusion Matrix
 cm = confusion_matrix(y_test, y_pred_test)
 plt.figure(figsize=(5, 4))
 sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
